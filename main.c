@@ -1,13 +1,42 @@
+//Autor: Gustavo de Mazo Silva
+
 #include <stdio.h>
 #include <locale.h>
 #include <conio.h>
 #include <stdlib.h>
+#include <time.h>
 #define SIZE 200
 char nome_A[SIZE][50],nome_B[SIZE][50], modalidade[SIZE][40], pais[SIZE][40];
 char nome_C[SIZE][50],nome_D[SIZE][50],email[SIZE][60],senha[SIZE][30];
 int medalha,ouro[SIZE] ,prata[SIZE] ,bronze[SIZE],total[SIZE];
 static int linha;
 static int line;
+struct rgAgora {
+  int dia, mes, ano;
+  int h, m, s;
+};
+void hora(){
+    char ds[7][4] = {"dom", "seg", "ter", "qua", "qui", "sex", "sab"};
+
+    struct tm tempo;
+    time_t tempoSeg;
+
+    time(&tempoSeg);
+    tempo = *localtime(&tempoSeg);
+
+    struct rgAgora agora;
+
+    agora.dia = tempo.tm_mday;
+    agora.mes = tempo.tm_mon + 1;
+    agora.ano = tempo.tm_year + 1900;
+    agora.h = tempo.tm_hour;
+    agora.m = tempo.tm_min;
+    agora.s = tempo.tm_sec;
+
+    printf("%02d/%02d/%d (%s) %02d:%02d:%02d horas.\n",
+        agora.dia, agora.mes, agora.ano, ds[tempo.tm_wday], agora.h, agora.m, agora.s);
+
+}
 
 //Tela de cadastro
 void cadastro(){
@@ -16,10 +45,10 @@ void cadastro(){
 
     printf("**********************************************************************\n");
     printf("*   \t\t\t    Tela de Cadastro                         * \n");
-    printf("**********************************************************************\n\n");
+    printf("**********************************************************************\n");
+    printf("\t\t");hora();
 
-
-    printf("Primeiro nome: \n");
+    printf("\n\nPrimeiro nome: \n");
     scanf("%s", &nome_C[line]);
 
     printf("Sobrenome: \n");
@@ -48,9 +77,10 @@ void entrar(){
 
     printf("**********************************************************************\n");
     printf("*   \t\t\t    Tela de Login                            * \n");
-    printf("**********************************************************************\n\n");
+    printf("**********************************************************************\n");
+    printf("\t\t");hora();
 
-    printf("Email:  \n");
+    printf("\n\nEmail:  \n");
     scanf("%s",&pesq_email);
 
     printf("Senha:  \n");
@@ -72,8 +102,9 @@ void menu_login(){
 
     printf("**********************************************************************\n");
     printf("*   \t\tBem-vindo as olimpiadas de Paris de 2024!            * \n");
-    printf("**********************************************************************\n\n");
-    printf("\t\t1- Logar     2- Cadastro     5- Sair \n");
+    printf("**********************************************************************\n");
+    printf("\t\t");hora();
+    printf("\n\n\t\t1- Logar     2- Cadastro     5- Sair \n");
     printf(" \n");
     printf("Digite: \n");
 
@@ -98,8 +129,9 @@ void cadastro_atletas(){
     system("cls");
     printf("----------------------------------------------------------------------\n");
     printf("|  \t\tCadastro de Atletas e Detalhes                       | \n");
-    printf("----------------------------------------------------------------------\n\n");
-    printf("Digite o primeiro nome \n->:");
+    printf("----------------------------------------------------------------------\n");
+    printf("\t\t");hora();
+    printf("\n\nDigite o primeiro nome \n->:");
     scanf("%s",&nome_A[linha]);
 
     printf("Digite o sobrenome\n->:");
@@ -113,7 +145,13 @@ void cadastro_atletas(){
 
     vazio();
 
-    printf("Digite 1 para cadastrar outro Atleta ou qualquer outro numero para sair.\n");
+    system("cls");
+    printf("----------------------------------------------------------------------\n");
+    printf("|  \t\tCadastro de Atletas e Detalhes                       | \n");
+    printf("----------------------------------------------------------------------\n");
+    printf("\t\t");hora();
+
+    printf("\n\nDigite 1 para cadastrar outro Atleta ou qualquer outro numero para sair.\n");
     scanf("%d", &numero);
     linha++;
     }while(numero == 1);
@@ -121,7 +159,12 @@ void cadastro_atletas(){
 void vazio(){
     int num;
 
-    printf("Digite 1 se quer cadastrar medalhas para este atleta\n->:");
+    system("cls");
+    printf("----------------------------------------------------------------------\n");
+    printf("|  \t\t         Cadastro de Medalhas                       | \n");
+    printf("----------------------------------------------------------------------\n");
+    printf("\t\t");hora();
+    printf("\n\nDigite 1 se quer cadastrar medalhas para este atleta\n->:");
     scanf("%d", &num);
 
     if(num==1){medalhas();}
@@ -129,8 +172,12 @@ void vazio(){
 }
 
 void medalhas(){
-
-    printf("Escolha uma opção abaixo:\n\n1- Ouro      2- Prata      3- Bronze      5- Voltar\n->:");
+    system("cls");
+    printf("----------------------------------------------------------------------\n");
+    printf("|  \t\t         Cadastro de Medalhas                        | \n");
+    printf("----------------------------------------------------------------------\n");
+    printf("\t\t");hora();
+    printf("\n\nEscolha uma opção abaixo:\n\n1- Ouro      2- Prata      3- Bronze      5- Voltar\n->:");
     scanf("%d",&medalha);
     switch(medalha){
         case 1:
@@ -176,6 +223,7 @@ void medalhas(){
 }
 void quadro_medalhas(){
     int i;
+    int soma;
 
         printf("País         Ouro    Prata    Bronze    Total\n");
         for(i=0;i<linha;i++){
@@ -190,7 +238,13 @@ void cadastro_medalhas(){
     char nom_pm[50];
     int i,gold ,prat,bronz;
 
-    printf("Escreva o primeiro nome do Atleta que ganhou a medalha:\n->: ");
+    system("cls");
+    printf("----------------------------------------------------------------------\n");
+    printf("|  \t\t          Cadastro de Medalhas                        | \n");
+    printf("----------------------------------------------------------------------\n");
+    printf("\t\t");hora();
+
+    printf("\n\nEscreva o primeiro nome do Atleta que ganhou a medalha:\n->: ");
     scanf("%s",&nom_at);
     printf("Escreva o segundo nome do Atleta:\n->: ");
     scanf("%s",&nom_pm);
@@ -258,9 +312,10 @@ void op_principal(){
 
     printf("----------------------------------------------------------------------\n");
     printf("|  \t\tMenu de opções selecione uma opção abaixo!           | \n");
-    printf("----------------------------------------------------------------------\n\n");
+    printf("----------------------------------------------------------------------\n");
+    printf("\t\t");hora();
 
-    printf("1- Atletas     2- Agenda Olímpica / Calendário de eventos    3- Quadro de medalhas\n\n4- Equipes     4- Cadastro de Medalhas     5- Informações COVID-19     9- Sair\n\n");
+    printf("\n\n1- Atletas     2- Agenda Olímpica / Calendário de eventos    3- Quadro de medalhas\n\n4- Cadastro de Medalhas     5- Informações COVID-19     9- Sair\n\n");
     printf("->:");
     scanf("%d", &numero);
 
@@ -296,8 +351,9 @@ void op_atletas(){
 
     printf("----------------------------------------------------------------------\n");
     printf("|  \t\tMenu de opções selecione uma opção abaixo!           | \n");
-    printf("----------------------------------------------------------------------\n\n");
-    printf("1- Cadastro de Atleta     2- Consulta de atletas e detalhes     3-  Local de alojamento\n\n6- Voltar\n\n");
+    printf("----------------------------------------------------------------------\n");
+    printf("\t\t");hora();
+    printf("\n\n1- Cadastro de Atleta     2- Consulta de atletas e detalhes     3-  Local de alojamento\n\n6- Voltar\n\n");
     printf("->: ");
     scanf("%d", &numero1);
 
@@ -348,6 +404,7 @@ void test_looping(){
 
     menu_login();
     scanf("%d", &numero);
+    printf("\n\n\n\n\n\n\n\n\n\n\n\n");
     switch(numero){
         case 1:
             entrar();

@@ -1,7 +1,0 @@
-# depslib dependency file v1.0
-1635791282 source:c:\users\gmazo\documents\programas c facul\projeto_pim\main.c
-	<stdio.h>
-	<locale.h>
-	<conio.h>
-	<stdlib.h>
-

@@ -2,50 +2,71 @@
 #include <locale.h>
 #include <conio.h>
 #include <stdlib.h>
+#define SIZE 200
+char nome_A[SIZE][50],nome_B[SIZE][50], modalidade[SIZE][40], pais[SIZE][40];
+char nome_C[SIZE][50],nome_D[SIZE][50],email[SIZE][60],senha[SIZE][30];
+int medalha,ouro[SIZE] ,prata[SIZE] ,bronze[SIZE],total[SIZE];
+static int linha;
+static int line;
 
 //Tela de cadastro
 void cadastro(){
     system("cls");
-    char nome[30];
-    char email[60];
-    char login[30];
-    char senha[30];
+    int i;
 
-     printf("**********************************************************************\n");
+    printf("**********************************************************************\n");
     printf("*   \t\t\t    Tela de Cadastro                         * \n");
     printf("**********************************************************************\n\n");
 
-    fgets(nome, 30, stdin);
-    printf("Nome: \n");
 
-    fgets(email, 60, stdin);
+    printf("Primeiro nome: \n");
+    scanf("%s", &nome_C[line]);
+
+    printf("Sobrenome: \n");
+    scanf("%s", &nome_D[line]);
+
     printf("Email: \n");
+    scanf("%s", &email[line]);
 
-    fgets(login, 30, stdin);
-    printf("Login: \n");
-
-    fgets(senha, 30, stdin);
     printf("Senha: \n");
+    scanf("%s", &senha[line]);
 
+    for(i=0;i<line;i++){
+        if(strcmp(email[i],email[line])==0){
+            printf("Email j√° existente!!\n\n");
+            system("pause");
+        }
+    }
+
+    line++;
 }
-
-//Login
-void login(){
+void entrar(){
+    int i;
     system("cls");
-    char login[15];
-    char senha[30];
+    char pesq_email[60];
+    char pesq_senha[30];
 
     printf("**********************************************************************\n");
     printf("*   \t\t\t    Tela de Login                            * \n");
     printf("**********************************************************************\n\n");
-    fgets(login, 15, stdin);
-    printf("Login:  \n");
 
-    fgets(senha, 30, stdin);
+    printf("Email:  \n");
+    scanf("%s",&pesq_email);
+
     printf("Senha:  \n");
+    scanf("%s",&pesq_senha);
 
+    for(i=0;i<SIZE;i++){
+        if(strcmp(email[i],pesq_email)==0 && (strcmp(senha[i],pesq_senha)==0)){
+            op_principal();
+        }else{
+            printf("EMAIL ou SENHA incorretos....\n\n");
+            system("pause");
+        }break;
+    }
+     menu_login();
 }
-//Menu do programa
+
 void menu_login(){
     system("cls");
 
@@ -57,103 +78,282 @@ void menu_login(){
     printf("Digite: \n");
 
 }
+void covid(){
+    system("cls");
+    int numero;
+    printf("\t\tPREVEN√á√ÉO\n\n1. Lave bem as m√£os e com frequ√™ncia, usando √°lcool em gel ou √°gua e sab√£o.\n\n");
+    printf("2. Mantenha uma dist√¢ncia m√≠nima de 1 metro entre voc√™ e qualquer pessoa que tosse ou espirra.\n\n");
+    printf("3. Evite tocar nos olhos, nariz e boca.\n\n");
+    printf("4. Fique em casa se n√£o estiver bem. Se voc√™ tiver febre, tosse e falta de ar, procure atendimento m√©dico e ligue com anteced√™ncia para o posto de sa√∫de, UPA ou pronto-socorro.\n\n");
 
+    system("pause");
+    op_principal();
+
+}
+
+void cadastro_atletas(){
+    int numero;
+
+    do{
+    system("cls");
+    printf("----------------------------------------------------------------------\n");
+    printf("|  \t\tCadastro de Atletas e Detalhes                       | \n");
+    printf("----------------------------------------------------------------------\n\n");
+    printf("Digite o primeiro nome \n->:");
+    scanf("%s",&nome_A[linha]);
+
+    printf("Digite o sobrenome\n->:");
+    scanf("%s",&nome_B[linha]);
+
+    printf("Pa√≠s representado\n->:");
+    scanf("%s",&pais[linha]);
+
+    printf("Modalidade Ol√≠mpica\n->:");
+    scanf("%s",modalidade[linha]);
+
+    vazio();
+
+    printf("Digite 1 para cadastrar outro Atleta ou qualquer outro numero para sair.\n");
+    scanf("%d", &numero);
+    linha++;
+    }while(numero == 1);
+}
+void vazio(){
+    int num;
+
+    printf("Digite 1 se quer cadastrar medalhas para este atleta\n->:");
+    scanf("%d", &num);
+
+    if(num==1){medalhas();}
+
+}
+
+void medalhas(){
+
+    printf("Escolha uma op√ß√£o abaixo:\n\n1- Ouro      2- Prata      3- Bronze      5- Voltar\n->:");
+    scanf("%d",&medalha);
+    switch(medalha){
+        case 1:
+            system("cls");
+            printf("----------------------------------------------------------------------\n");
+            printf("|  \t\t         Medalhas de Ouro!                           | \n");
+            printf("----------------------------------------------------------------------\n\n");
+            printf("Digite o numero de medalhas de ouro\n->: ");
+            scanf("%d",&ouro[linha]);
+            printf("Incluindo %d medalha(s) de ouro\n\n",ouro[linha]);
+            system("pause");
+            medalhas();
+            break;
+        case 2:
+            system("cls");
+            printf("----------------------------------------------------------------------\n");
+            printf("|  \t\t       Medalhas de Prata!                            | \n");
+            printf("----------------------------------------------------------------------\n\n");
+            printf("Digite o numero de medalhas de prata\n->: ");
+            scanf("%d",&prata[linha]);
+            printf("Incluindo %d medalha(s) de prata\n\n",prata[linha]);
+            system("pause");
+            medalhas();
+            break;
+        case 3:
+            system("cls");
+            printf("----------------------------------------------------------------------\n");
+            printf("|  \t\t      Medalhas de Bronze!                            | \n");
+            printf("----------------------------------------------------------------------\n\n");
+            printf("Digite o numero de medalhas de bronze\n->: ");
+            scanf("%d",&bronze[linha]);
+            printf("Incluindo %d medalha(s) de bronze\n\n",bronze[linha]);
+            system("pause");
+            medalhas();
+            break;
+        case 5:
+            vazio();;
+            break;
+        default:
+            printf("N√∫mero inv√°lido!!!");
+            vazio();
+    }
+}
+void quadro_medalhas(){
+    int i;
+
+        printf("Pa√≠s         Ouro    Prata    Bronze    Total\n");
+        for(i=0;i<linha;i++){
+            total[i]= ouro[i]+prata[i]+bronze[i];
+            printf("%s       %d       %d         %d        %d\n\n\n",pais[i],ouro[i],prata[i],bronze[i],total[i]);
+        }
+    system("pause");
+    op_principal();
+}
+void cadastro_medalhas(){
+    char nom_at[50];
+    char nom_pm[50];
+    int i,gold ,prat,bronz;
+
+    printf("Escreva o primeiro nome do Atleta que ganhou a medalha:\n->: ");
+    scanf("%s",&nom_at);
+    printf("Escreva o segundo nome do Atleta:\n->: ");
+    scanf("%s",&nom_pm);
+
+    for(i=0;i<linha;i++){
+        if(strcmp(nome_A[i],nom_at)==0 && strcmp(nome_B[i],nom_pm)==0){
+            printf("Escolha qual medalha quer vincular a este atleta:\n\n");
+            printf("1- Ouro      2- Prata      3- Bronze      5- Voltar\n->:");
+            scanf("%d",&medalha);
+
+            switch(medalha){
+                case 1:
+                    system("cls");
+                    printf("----------------------------------------------------------------------\n");
+                    printf("|  \t\t         Medalhas de Ouro!                           | \n");
+                    printf("----------------------------------------------------------------------\n\n");
+                    printf("Digite o numero de medalhas de ouro que deseja acrescentar\n->: ");
+                    scanf("%d",&gold);
+                    printf("Incluindo %d medalha(s) de ouro\n\n",gold);
+                    ouro[i]+= gold;
+                    system("pause");
+                    medalhas();
+                    break;
+                case 2:
+                    system("cls");
+                    printf("----------------------------------------------------------------------\n");
+                    printf("|  \t\t       Medalhas de Prata!                            | \n");
+                    printf("----------------------------------------------------------------------\n\n");
+                    printf("Digite o numero de medalhas de prata que deseja acrescentar\n->: ");
+                    scanf("%d",&prat);
+                    printf("Incluindo %d medalha(s) de prata\n\n",prat);
+                    prata[i]+=prat;
+                    system("pause");
+                    medalhas();
+                    break;
+                case 3:
+                    system("cls");
+                    printf("----------------------------------------------------------------------\n");
+                    printf("|  \t\t      Medalhas de Bronze!                            | \n");
+                    printf("----------------------------------------------------------------------\n\n");
+                    printf("Digite o numero de medalhas de bronze que deseja acrescentar\n->: ");
+                    scanf("%d",&bronz);
+                    printf("Incluindo %d medalha(s) de bronze\n\n",bronz);
+                    bronze[i]+=bronz;
+                    system("pause");
+                    op_principal();
+                    break;
+                case 5:
+                    op_principal();
+                    break;
+                default:
+                    printf("N√∫mero inv√°lido!!!");
+                    cadastro_medalhas();
+            }
+        }else{
+            printf("Nome n√£o cadastrado ou incorreto.");
+        }
+    }
+    system("pause");
+    op_principal();
+}
 void op_principal(){
     system("cls");
     int numero;
 
     printf("----------------------------------------------------------------------\n");
-    printf("|  \t\tMenu de opÁıes selecione uma opÁ„o abaixo!           | \n");
+    printf("|  \t\tMenu de op√ß√µes selecione uma op√ß√£o abaixo!           | \n");
     printf("----------------------------------------------------------------------\n\n");
 
-    printf("1- Atletas     2- Locais e treinamentos     3- RelatÛrios\n\n4- Equipes     5- InformaÁıes COVID-19     9- Sair\n\n");
+    printf("1- Atletas     2- Agenda Ol√≠mpica / Calend√°rio de eventos    3- Quadro de medalhas\n\n4- Equipes     4- Cadastro de Medalhas     5- Informa√ß√µes COVID-19     9- Sair\n\n");
     printf("->:");
     scanf("%d", &numero);
 
 
     switch(numero){
-case 1:
+    case 1:
         op_atletas();
-    break;
-case 2:
-    break;
-case 3:
-    break;
-case 4:
-    break;
-case 5:
+        break;
+    case 2:
+        break;
+    case 3:
+        quadro_medalhas();
+        break;
+    case 4:
+        cadastro_medalhas();
+        break;
+    case 5:
         covid();
-    break;
-case 9:
-    printf("Finalizando o programa...\n\n");
-    break;
-
-
+        break;
+    case 9:
+        printf("Finalizando o programa...\n\n");
+        break;
     }
 
 
 }
 void op_atletas(){
-    int numero1;
+    int numero1,numero, i;
+    char pesq_nom[40];
+
+
     system("cls");
+
     printf("----------------------------------------------------------------------\n");
-    printf("|  \t\tMenu de opÁıes selecione uma opÁ„o abaixo!           | \n");
+    printf("|  \t\tMenu de op√ß√µes selecione uma op√ß√£o abaixo!           | \n");
     printf("----------------------------------------------------------------------\n\n");
-    printf("1- Cadastro de Atletas     2- Consulta de atletas e detalhes     3- Alojamentos     4- Equipamentos     6- Voltar\n\n");
-    printf("-> \n");
+    printf("1- Cadastro de Atleta     2- Consulta de atletas e detalhes     3-  Local de alojamento\n\n6- Voltar\n\n");
+    printf("->: ");
     scanf("%d", &numero1);
 
     switch(numero1){
     case 1:
+        cadastro_atletas();
+        return(op_atletas());
         break;
     case 2:
+        do{
+        system("cls");
+        printf("----------------------------------------------------------------------\n");
+        printf("|  \t\tConsulta de Atletas e Detalhes                       | \n");
+        printf("----------------------------------------------------------------------\n\n");
+
+
+        printf("Digite o Nome ou o Sobrenome do Atleta\n->:");
+        scanf("%s",&pesq_nom);
+
+        for(i=0;i<SIZE;i++){
+            if(strcmp(nome_A[i],pesq_nom)==0 || strcmp(nome_B[i],pesq_nom)==0){
+                printf("\nNome do Atleta: %s %s\nPa√≠s: %s\nModalidade: %s\n",nome_A[i],nome_B[i],pais[i],modalidade[i]);
+                total[i]= ouro[i]+prata[i]+bronze[i];
+                printf("Medalhas: %d\nOuro: %d\nPrata: %d\nBronze: %d\n",total[i],ouro[i],prata[i],bronze[i]);
+                }
+            }
+
+        printf("\nDigite 1 para pesquisar outro nome ou qualquer outro numero para sair.\n");
+        scanf("%d", &numero);
+
+        }while(numero == 1);
+        return(op_atletas());
         break;
     case 3:
-        break;
-    case 4:
         break;
     case 6:
         op_principal();
         break;
     default:
-        printf("N˙mero incorreto\n\n");
+        printf("N√∫mero incorreto\n\n");
         system("pause");
-        return(op_atletas());
-    }
-}
-void covid(){
-    system("cls");
-    int numero;
-    printf("PREVEN«√O\n\n1. Lave bem as m„os e com frequÍncia, usando ·lcool em gel ou ·gua e sab„o.\n\n");
-    printf("2. Mantenha uma dist‚ncia mÌnima de 1 metro entre vocÍ e qualquer pessoa que tosse ou espirra.\n\n");
-    printf("3. Evite tocar nos olhos, nariz e boca.\n\n");
-    printf("4. Fique em casa se n„o estiver bem. Se vocÍ tiver febre, tosse e falta de ar, procure atendimento mÈdico e ligue com antecedÍncia para o posto de sa˙de, UPA ou pronto-socorro.\n\n");
-    printf("Pressione qualquer n˙mero para voltar: ");
-    scanf("%d", &numero);
+        return(op_atletas());}
 
-    if (numero >0 || numero <0){
-        op_principal();
-    }
 }
 
-int main()
-{
-    setlocale(LC_ALL, "Portuguese");
-
+void test_looping(){
     int numero;
-    char tela[30];
-    char cadastr[30];
 
     menu_login();
     scanf("%d", &numero);
     switch(numero){
         case 1:
-            login();
-            fgets(tela,30,stdin);
+            entrar();
             break;
         case 2:
             cadastro();
-            fgets(cadastr, 30, stdin);
             break;
         case 5:
             printf("Finalizando o programa...\n");
@@ -163,31 +363,19 @@ int main()
             break;
     }
 
-    /*If para fazer com que o usu·rio que se cadastre
+    /*If para fazer com que o usu√°rio que se cadastre
     volte para fazer o login*/
 
     if(numero == 2){
-            menu_login();
-    scanf("%d", &numero);
-    switch(numero){
-        case 1:
-            login();
-            fgets(tela,30,stdin);
-            break;
-        case 2:
-            cadastro();
-            fgets(cadastr, 30, stdin);
-            break;
-        case 5:
-            printf("Finalizando o programa...\n");
-            break;
-        default:
-            printf("Numero incorreto \n");
-                break;
+            test_looping();
     }
-    }
+    test_looping();
+}
 
-    op_principal();
+int main(){
+    setlocale(LC_ALL, "Portuguese");
+
+    test_looping();
 
     system("pause");
     return 0;

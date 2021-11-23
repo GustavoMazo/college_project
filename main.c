@@ -4,9 +4,14 @@
 #include <locale.h>
 #include <conio.h>
 #include <stdlib.h>
+#define ANSI_COLOR_GREEN	"\e[0;32m"
+#define ANSI_COLOR_RESET   "\e[0m"
+#define ANSI_COLOR_BLUE    "\e[34m"
+#define ANSI_COLOR_YELLOW  "\e[33m"
 #include <time.h>
 #define SIZE 200
-char nome_A[SIZE][50],nome_B[SIZE][50], modalidade[SIZE][40], pais[SIZE][40];
+
+char nome_A[SIZE][50],nome_B[SIZE][50], modalidade[SIZE][40],paiss[SIZE][40], pais[SIZE][40];
 char nome_C[SIZE][50],nome_D[SIZE][50],email[SIZE][60],senha[SIZE][30];
 int medalha,ouro[SIZE] ,prata[SIZE] ,bronze[SIZE],total[SIZE];
 static int linha;
@@ -37,18 +42,17 @@ void hora(){
         agora.dia, agora.mes, agora.ano, ds[tempo.tm_wday], agora.h, agora.m, agora.s);
 
 }
-
 //Tela de cadastro
 void cadastro(){
     system("cls");
     int i;
 
     printf("**********************************************************************\n");
-    printf("*   \t\t\t    Tela de Cadastro                         * \n");
+    printf("*   \t\t\t  Tela de Cadastro                           * \n");
     printf("**********************************************************************\n");
-    printf("\t\t");hora();
+    printf(ANSI_COLOR_GREEN"\t\t");hora();
 
-    printf("\n\nPrimeiro nome: \n");
+    printf(ANSI_COLOR_RESET"\n\nPrimeiro nome: \n");
     scanf("%s", &nome_C[line]);
 
     printf("Sobrenome: \n");
@@ -78,9 +82,9 @@ void entrar(){
     printf("**********************************************************************\n");
     printf("*   \t\t\t    Tela de Login                            * \n");
     printf("**********************************************************************\n");
-    printf("\t\t");hora();
+    printf(ANSI_COLOR_GREEN"\t\t");hora();
 
-    printf("\n\nEmail:  \n");
+    printf(ANSI_COLOR_RESET"\n\nEmail:  \n");
     scanf("%s",&pesq_email);
 
     printf("Senha:  \n");
@@ -103,19 +107,17 @@ void menu_login(){
     printf("**********************************************************************\n");
     printf("*   \t\tBem-vindo as olimpiadas de Paris de 2024!            * \n");
     printf("**********************************************************************\n");
-    printf("\t\t");hora();
-    printf("\n\n\t\t1- Logar     2- Cadastro     5- Sair \n");
-    printf(" \n");
+    printf(ANSI_COLOR_GREEN"\t\t");hora();
+    printf(ANSI_COLOR_RESET ANSI_COLOR_YELLOW"\n\n\t\t\t1- Logar\n\n\t\t\t2- Cadastro\n\n\t\t\t5- Sair \n\n"ANSI_COLOR_RESET);
     printf("Digite: \n");
-
 }
 void covid(){
     system("cls");
     int numero;
-    printf("\t\tPREVENÇÃO\n\n1. Lave bem as mãos e com frequência, usando álcool em gel ou água e sabão.\n\n");
+    printf(ANSI_COLOR_YELLOW"\t\tPREVENÇÃO\n\n1. Lave bem as mãos e com frequência, usando álcool em gel ou água e sabão.\n\n");
     printf("2. Mantenha uma distância mínima de 1 metro entre você e qualquer pessoa que tosse ou espirra.\n\n");
     printf("3. Evite tocar nos olhos, nariz e boca.\n\n");
-    printf("4. Fique em casa se não estiver bem. Se você tiver febre, tosse e falta de ar, procure atendimento médico e ligue com antecedência para o posto de saúde, UPA ou pronto-socorro.\n\n");
+    printf("4. Fique em casa se não estiver bem. Se você tiver febre, tosse e falta de ar, procure atendimento médico e ligue com antecedência para o posto de saúde, UPA ou pronto-socorro.\n\n"ANSI_COLOR_RESET);
 
     system("pause");
     op_principal();
@@ -123,15 +125,15 @@ void covid(){
 }
 
 void cadastro_atletas(){
-    int numero;
+    int numero, i;
 
     do{
     system("cls");
     printf("----------------------------------------------------------------------\n");
     printf("|  \t\tCadastro de Atletas e Detalhes                       | \n");
     printf("----------------------------------------------------------------------\n");
-    printf("\t\t");hora();
-    printf("\n\nDigite o primeiro nome \n->:");
+    printf(ANSI_COLOR_GREEN"\t\t");hora();
+    printf(ANSI_COLOR_RESET"\n\nDigite o primeiro nome \n->:");
     scanf("%s",&nome_A[linha]);
 
     printf("Digite o sobrenome\n->:");
@@ -149,9 +151,9 @@ void cadastro_atletas(){
     printf("----------------------------------------------------------------------\n");
     printf("|  \t\tCadastro de Atletas e Detalhes                       | \n");
     printf("----------------------------------------------------------------------\n");
-    printf("\t\t");hora();
+    printf(ANSI_COLOR_GREEN"\t\t");hora();
 
-    printf("\n\nDigite 1 para cadastrar outro Atleta ou qualquer outro numero para sair.\n");
+    printf(ANSI_COLOR_RESET"\n\nDigite 1 para cadastrar outro Atleta ou qualquer outro numero para sair.\n");
     scanf("%d", &numero);
     linha++;
     }while(numero == 1);
@@ -176,8 +178,8 @@ void medalhas(){
     printf("----------------------------------------------------------------------\n");
     printf("|  \t\t         Cadastro de Medalhas                        | \n");
     printf("----------------------------------------------------------------------\n");
-    printf("\t\t");hora();
-    printf("\n\nEscolha uma opção abaixo:\n\n1- Ouro      2- Prata      3- Bronze      5- Voltar\n->:");
+    printf(ANSI_COLOR_GREEN"\t\t");hora();
+    printf(ANSI_COLOR_RESET"\n\nEscolha uma opção abaixo:\n\n1- Ouro      2- Prata      3- Bronze      5- Voltar\n->:");
     scanf("%d",&medalha);
     switch(medalha){
         case 1:
@@ -229,7 +231,7 @@ void quadro_medalhas(){
         for(i=0;i<linha;i++){
             total[i]= ouro[i]+prata[i]+bronze[i];
             printf("%s       %d       %d         %d        %d\n\n\n",pais[i],ouro[i],prata[i],bronze[i],total[i]);
-        }
+    }
     system("pause");
     op_principal();
 }
@@ -242,9 +244,9 @@ void cadastro_medalhas(){
     printf("----------------------------------------------------------------------\n");
     printf("|  \t\t          Cadastro de Medalhas                        | \n");
     printf("----------------------------------------------------------------------\n");
-    printf("\t\t");hora();
+    printf(ANSI_COLOR_GREEN"\t\t");hora();
 
-    printf("\n\nEscreva o primeiro nome do Atleta que ganhou a medalha:\n->: ");
+    printf(ANSI_COLOR_RESET"\n\nEscreva o primeiro nome do Atleta que ganhou a medalha:\n->: ");
     scanf("%s",&nom_at);
     printf("Escreva o segundo nome do Atleta:\n->: ");
     scanf("%s",&nom_pm);
@@ -313,10 +315,10 @@ void op_principal(){
     printf("----------------------------------------------------------------------\n");
     printf("|  \t\tMenu de opções selecione uma opção abaixo!           | \n");
     printf("----------------------------------------------------------------------\n");
-    printf("\t\t");hora();
+    printf(ANSI_COLOR_GREEN"\t\t");hora();
 
-    printf("\n\n1- Atletas     2- Agenda Olímpica / Calendário de eventos    3- Quadro de medalhas\n\n4- Cadastro de Medalhas     5- Informações COVID-19     9- Sair\n\n");
-    printf("->:");
+    printf(ANSI_COLOR_RESET ANSI_COLOR_YELLOW"\n\n\t\t\t1- Atletas\n\n\t\t\t2- Agenda Olímpica / Calendário de eventos\n\n\t\t\t3- Quadro de medalhas\n\n\t\t\t4- Cadastro de Medalhas\n\n\t\t\t5- Informações COVID-19\n\n\t\t\t9- Sair\n\n\n");
+    printf(ANSI_COLOR_RESET"->:");
     scanf("%d", &numero);
 
 
@@ -352,9 +354,9 @@ void op_atletas(){
     printf("----------------------------------------------------------------------\n");
     printf("|  \t\tMenu de opções selecione uma opção abaixo!           | \n");
     printf("----------------------------------------------------------------------\n");
-    printf("\t\t");hora();
-    printf("\n\n1- Cadastro de Atleta     2- Consulta de atletas e detalhes     3-  Local de alojamento\n\n6- Voltar\n\n");
-    printf("->: ");
+    printf(ANSI_COLOR_GREEN"\t\t");hora();
+    printf(ANSI_COLOR_RESET ANSI_COLOR_YELLOW"\n\n\t\t\t1- Cadastro de Atleta\n\n\t\t\t2- Consulta de atletas e detalhes\n\n\t\t\t3-Local de alojamento\n\n\t\t\t6- Voltar\n\n");
+    printf(ANSI_COLOR_RESET"->: ");
     scanf("%d", &numero1);
 
     switch(numero1){

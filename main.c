@@ -4,10 +4,11 @@
 #include <locale.h>
 #include <conio.h>
 #include <stdlib.h>
-#define ANSI_COLOR_GREEN	"\e[0;32m"
+#define ANSI_COLOR_GREEN   "\e[0;32m"
 #define ANSI_COLOR_RESET   "\e[0m"
 #define ANSI_COLOR_BLUE    "\e[34m"
 #define ANSI_COLOR_YELLOW  "\e[33m"
+#define ANSI_COLOR_CYAN    "\e[36m"
 #include <time.h>
 #define SIZE 200
 
@@ -123,7 +124,7 @@ void covid(){
     op_principal();
 
 }
-
+s
 void cadastro_atletas(){
     int numero, i;
 
@@ -230,7 +231,7 @@ void quadro_medalhas(){
         printf("País         Ouro    Prata    Bronze    Total\n");
         for(i=0;i<linha;i++){
             total[i]= ouro[i]+prata[i]+bronze[i];
-            printf("%s       %d       %d         %d        %d\n\n\n",pais[i],ouro[i],prata[i],bronze[i],total[i]);
+            printf("%s       %d       %d         %d        %d\n\n",pais[i],ouro[i],prata[i],bronze[i],total[i]);
     }
     system("pause");
     op_principal();
@@ -355,7 +356,7 @@ void op_atletas(){
     printf("|  \t\tMenu de opções selecione uma opção abaixo!           | \n");
     printf("----------------------------------------------------------------------\n");
     printf(ANSI_COLOR_GREEN"\t\t");hora();
-    printf(ANSI_COLOR_RESET ANSI_COLOR_YELLOW"\n\n\t\t\t1- Cadastro de Atleta\n\n\t\t\t2- Consulta de atletas e detalhes\n\n\t\t\t3-Local de alojamento\n\n\t\t\t6- Voltar\n\n");
+    printf(ANSI_COLOR_RESET ANSI_COLOR_YELLOW"\n\n\t\t\t1- Cadastro de Atleta\n\n\t\t\t2- Consulta de atletas e detalhes\n\n\t\t\t3- Local de alojamento\n\n\t\t\t6- Voltar\n\n");
     printf(ANSI_COLOR_RESET"->: ");
     scanf("%d", &numero1);
 

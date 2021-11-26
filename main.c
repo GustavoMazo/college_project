@@ -15,6 +15,7 @@
 #include <time.h>
 #define SIZE 200
 
+FILE *file;
 char nome_A[SIZE][50],nome_B[SIZE][50], modalidade[SIZE][40],paiss[SIZE][40], pais[SIZE][40];
 char nome_C[SIZE][50],nome_D[SIZE][50],email[SIZE][60],senha[SIZE][30];
 int medalha,ouro[SIZE] ,prata[SIZE] ,bronze[SIZE],total[SIZE];
@@ -53,6 +54,12 @@ void cadastro(){
     system("cls");
     int i;
 
+    file = fopen("arquivo_login.txt", "w");
+    if(file == NULL){
+        printf("Erro ao abrir o arquivo\n");
+        system("pause");
+        return 0;
+    }
     printf("**********************************************************************\n");
     printf("*   \t\t\t  Tela de Cadastro                           * \n");
     printf("**********************************************************************\n");
@@ -61,14 +68,22 @@ void cadastro(){
     printf(ANSI_COLOR_RESET"\n\nPrimeiro nome: \n");
     scanf("%s", &nome_C[line]);
 
+    fprintf(file,"%s ", nome_C[line]);
+
     printf("Sobrenome: \n");
     scanf("%s", &nome_D[line]);
+
+    fprintf(file,"%s ", nome_D[line]);
 
     printf("Email: \n");
     scanf("%s", &email[line]);
 
+    fprintf(file,"%s ", email[line]);
+
     printf("Senha: \n");
     scanf("%s", &senha[line]);
+
+    fprintf(file,"%s ", senha[line]);
 
     for(i=0;i<line;i++){
         if(strcmp(email[i],email[line])==0){
@@ -76,6 +91,7 @@ void cadastro(){
             system("pause");
         }
     }
+    fclose(file);
 
     line++;
 }
@@ -426,20 +442,14 @@ void op_principal(){
         break;
     case 9:
         printf("Finalizando o programa...\n\n");
+        system("pause");
+        return 1;
         break;
     }
 
 
 }
-//OPÇÃO ALOJAMENTO NA OPÇÃO ATLETAS
-void op_alojamento(){
-    system("cls");
-    printf("----------------------------------------------------------------------\n");
-    printf("|  \t\t                  Alojamentos                        | \n");
-    printf("----------------------------------------------------------------------\n");
-    printf(ANSI_COLOR_GREEN"\t\t\t");hora();
-    printf(ANSI_COLOR_RESET"")
-}
+
 //OPÇÃO ATLETAS NO MENU PRINCIPAL
 void op_atletas(){
     int numero1,numero, i;
@@ -513,6 +523,7 @@ void test_looping(){
             break;
         case 5:
             printf("Finalizando o programa...\n");
+            return 1;
             break;
         default:
             printf("Numero incorreto \n");
